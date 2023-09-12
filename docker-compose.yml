@@ -8,3 +8,6 @@ services:
       POSTGRES_PASSWORD: postgresadmin1234
       POSTGRES_DB: mygocqrsdb
     restart: always
+  nats:
+    image: "nats-streaming:0.9.2"
+    restart: always
