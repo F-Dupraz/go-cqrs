@@ -31,7 +31,7 @@ func newRouter() (router *mux.Router) {
 
 func main() {
 	var cfg Config
-	err := envconfig.Process("", cfg)
+	err := envconfig.Process("", &cfg)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,7 +47,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	es.SetSearchRepository(es)
+	search.SetSearchRepository(es)
 
 	defer search.Close()
 
@@ -55,8 +55,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	events.SetEventStore(n)
-
 	err = n.OnCreatedFeed(onCreatedFeed)
 	if err != nil {
 		log.Fatal(err)
